@@ -46,13 +46,13 @@ function TalkToUsComponent() {
                     <div className="flex flex-col items-center text-center lg:text-start lg:items-start w-full rounded-3xl p-10" style={talkToUsBackground}>
                         <div className="">
                             <div className="max-w-sm lg:max-w-full text-white font-bold text-xl md:text-2xl lg:text-4xl xl:text-5xl lg:space-y-4">
-                                <p className='block md:hidden'>Ready to start on your AI journey? Let's find your Ideal Krut Plan together.</p>
-                                <p className='hidden md:block'>Ready to start on your AI journey? </p>
+                                <p className='block md:hidden'>Ready to start your AI journey? Let's find your Ideal Krut Plan together.</p>
+                                <p className='hidden md:block'>Ready to start your AI journey? </p>
                                 <p className='hidden md:block'>Let's find your Ideal Krut Plan together.</p>
                             </div>
                         </div>
                         <div className="lg:w-full lg:flex lg:justify-end lg:mt-44"> {/* Change: Added justify-end */}
-                            <button className='max-w-[200px] bg-white text-xl rounded-3xl mb-5 mt-8 py-1.5 px-10 font-semibold cursor-pointer'
+                            <button className='max-w-[200px] bg-white text-xl rounded-3xl mb-5 mt-8 py-1.5 px-10 font-semibold cursor-pointer zoomEffect'
                             onClick={()=>Navigate("/contact")}>
                                 Talk to Us
                             </button>

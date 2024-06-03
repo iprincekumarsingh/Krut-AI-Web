@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/Images/image_prev_ui (2).png";
 import { HiMenuAlt4 } from "react-icons/hi";
-import { BiMailSend } from "react-icons/bi";
+// import { BiMailSend } from "react-icons/bi";
 import { MdCastForEducation } from "react-icons/md";
 import { MdOutgoingMail } from "react-icons/md";
 import { CgFileDocument } from "react-icons/cg";
@@ -14,8 +14,10 @@ import { useLocation } from "react-router-dom";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSupportOpen, setIsSupportOpen] = useState(false);
-  const location = useLocation(); 
-  
+  const location = useLocation();
+  const Navigate = useNavigate();
+
+  const supportMenu = useRef(null);
   const dropdownRef = useRef(null);
 
   const toggleMenu = () => {
@@ -31,6 +33,22 @@ const Header = () => {
       setIsOpen(false);
       setIsSupportOpen(false);
     }
+    if (supportMenu.current && !supportMenu.current.contains(e.target)) {
+      // setIsOpen(false);
+      // setIsSupportOpen(false);
+    }
+  };
+
+  const scrollToToolsList = () => {
+    const toolsListElement = document.getElementById('ToolsList');
+    if (toolsListElement) {
+      toolsListElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setTimeout(() => {
+        scrollToToolsList
+      }, 1000);
+      Navigate("/tools")
+    }
   };
 
   useEffect(() => {
@@ -40,8 +58,8 @@ const Header = () => {
     };
   }, []);
 
-useEffect(() => {
-      window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, [location]);
 
   return (
@@ -59,24 +77,21 @@ useEffect(() => {
             <HiMenuAlt4 className="text-white text-3xl" onClick={toggleMenu} />
           </div>
 
+          {/* Mobile Header */}
           {isOpen && (
             <div
               ref={dropdownRef}
-              className="md:hidden z-50 absolute top-0 left-0 w-full bg-black p-4"
-            >
-              <div className="relative flex flex-col  mx-4 my-4 gap-4 py-5">
-                <Link
-                  to="/tools"
-                  className="text-white text-xl 2xl:text-2xl font-semibold"
-                >
-                  Tools
-                </Link>
+              className="md:hidden z-50 absolute top-0 left-0 w-full bg-black p-8 h-[100vh]">
+              <div className="relative flex flex-col  mx-4 my-4 gap-8 py-5">
+
+                <div className="flex items-center justify-end px-4 w-full text-white">
+                  <span className="material-symbols-outlined cursor-pointer" onClick={toggleMenu}> close </span>
+                </div>
+
+                <div onClick={scrollToToolsList} className="text-white text-2xl font-semibold cursor-pointer"> Tools </div>
+
                 <div className="relative group ">
-                  <Link
-                    to=""
-                    className="text-white text-xl 2xl:text-2xl font-semibold flex gap-5"
-                    onClick={toggleSupportMenu}
-                  >
+                  <Link to="" className="text-white text-2xl font-semibold flex gap-5" onClick={toggleSupportMenu} >
                     Support{" "}
                     {isSupportOpen ? (
                       <IoChevronUpOutline
@@ -92,61 +107,52 @@ useEffect(() => {
                   {isSupportOpen && (
                     <div className="w-full bg-black shadow-lg rounded-lg mt-2 mx-16">
 
-                      <Link
-                        to="/blogs"
-                        className="px-4 py-2  text-white flex gap-2"
-                      >
+                      <Link to="/blogs" className="px-4 py-2 pb-4  text-white text-2xl flex gap-2" >
                         <CgFileDocument style={{ marginTop: '3px' }} /> Blog
                       </Link>
-                      {/* <Link
-                        to="/tutorials"
-                        className=" px-4 py-2  text-white flex gap-2"
-                      >
-                        <MdCastForEducation style={{marginTop:'3px'}}/> Tutorials
-                      </Link> */}
-                      <Link
-                        to="/contact"
-                        className=" px-4 py-2 text-white flex gap-2"
-                      >
+
+                      <a href="https://krut-ai.notion.site/Krut-AI-Beta-User-Manual-b2d5df9733cd411e99b4e92a68c7c154"
+                        target="_blank" className=" px-4 py-2 pb-4  text-white text-2xl flex gap-2" >
+                        <MdCastForEducation style={{ marginTop: '3px' }} /> Tutorials
+                      </a>
+
+                      <Link to="/contact" className=" px-4 py-2 text-white text-2xl flex gap-2" >
                         <MdOutgoingMail style={{ marginTop: '3px' }} /> Contact
                       </Link>
                     </div>
                   )}
                 </div>
-                <Link
-                  to="/"
-                  className="text-white text-xl 2xl:text-2xl font-semibold"
-                >
+                {/* <Link to="https://discord.gg/vf2jJxEVn7" className="text-white text-2xl font-semibold" >
                   Community
-                </Link>
-                <Link
-                  to="/pricing"
-                  className="text-white text-xl 2xl:text-2xl font-semibold"
-                >
+                </Link> */}
+                <Link to="/pricing" className="text-white text-2xl font-semibold" >
                   Pricing
+                </Link>
+                <Link to="/bookademo" className="text-white text-2xl font-semibold" >
+                  Book A Demo
                 </Link>
               </div>
             </div>
           )}
 
+
+          {/* Large display Header */}
           <div className="header-items hidden md:flex  lg:gap-16 md:gap-10 mt-2">
-            <Link
-              to="/tools"
-              className="text-white md:text-sm lg:text-xl 2xl:text-2xl"
-            >
+            <div
+              onClick={scrollToToolsList}
+              className="text-white md:text-sm lg:text-xl 2xl:text-2xl cursor-pointer">
               <span>Tools</span>
-            </Link>
+            </div>
+
             <div className="relative group">
-              <Link
-                to=""
-                className="text-white  md:text-sm  lg:text-xl 2xl:text-2xl"
-                onMouseEnter={() => {
-                  setIsOpen(true);
-                }}
-              >
+
+              <div className="text-white md:text-sm  lg:text-xl 2xl:text-2xl cursor-pointer"
+                onMouseEnter={toggleSupportMenu} >
                 Support
-              </Link>
-              <div className="border border-cyan-100 absolute top-full  lg:ml-[-60px] w-[16rem] bg-black shadow-lg rounded-lg mt-2 hidden group-hover:block">
+              </div>
+
+              {isSupportOpen && <div ref={supportMenu} className="border border-cyan-100 absolute top-full  lg:ml-[-60px] w-[16rem] bg-black shadow-lg rounded-lg mt-2"
+                onMouseLeave={toggleSupportMenu} >
                 <Link to="/blogs" className="block px-4 py-2 text-white ">
                   <div className="flex  hover:bg-white hover:text-black hover:rounded-xl">
                     <div className="text-4xl">
@@ -161,7 +167,7 @@ useEffect(() => {
                   </div>
                 </Link>
 
-                {/* <Link to="/tutorials" className="block px-4 py-2 text-white ">
+                <a href="https://krut-ai.notion.site/Krut-AI-Beta-User-Manual-b2d5df9733cd411e99b4e92a68c7c154" target="_blank" className="block px-4 py-2 text-white ">
                   <div className="flex  hover:bg-white hover:text-black hover:rounded-xl">
                     <div className="text-4xl">
                       <MdCastForEducation />
@@ -173,7 +179,7 @@ useEffect(() => {
                       </p>
                     </div>
                   </div>
-                </Link> */}
+                </a>
 
                 <Link to="/contact" className="block px-4 py-2 text-white ">
                   <div className="flex hover:bg-white hover:text-black hover:rounded-xl">
@@ -188,31 +194,25 @@ useEffect(() => {
                     </div>
                   </div>
                 </Link>
-              </div>
+
+              </div>}
             </div>
 
-            <Link
-              to="/"
-              className="text-white  md:text-sm  lg:text-xl 2xl:text-2xl"
-            >
-              <span>Community</span>
-            </Link>
-            <Link
-              to="/pricing"
-              className="text-white  md:text-sm lg:text-xl 2xl:text-2xl"
-            >
+            {/* <div className="text-white  md:text-sm  lg:text-xl 2xl:text-2xl" >
+              <a href="https://discord.gg/vf2jJxEVn7" target='_blank'>Community</a>
+            </div> */}
+
+            <Link to="/pricing" className="text-white  md:text-sm lg:text-xl 2xl:text-2xl" >
               <span>Pricing</span>
             </Link>
           </div>
 
-          <Link
-            to="/contact"
+          <Link to="/bookademo"
             className="hidden md:block  rounded-full text-black font-bold md:text-lg lg:text-xl 2xl:text-2xl md:px-5 md:py-1 lg:px-7 lg:py-2 2xl:px-9 2xl:py-4"
             style={{
               background:
                 "linear-gradient(180deg, #FFFFFF -225.69%, #01DDE9 35.95%, #37003E 141.48%)",
-            }}
-          >
+            }}>
             Book a Demo
           </Link>
         </div>

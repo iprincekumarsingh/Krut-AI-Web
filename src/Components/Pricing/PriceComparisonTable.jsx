@@ -49,11 +49,11 @@ function PriceComparisonTable() {
                                             <div className="flex items-center">
                                                 <span className={`material-symbols-outlined pe-1 md:block
                                                     ${(key === "Availability" || key === "Contact Method") ||
-                                                        (key === "Number of Downloads (per month)" || key === "Download Format") ? "hidden" : ""} `}>
+                                                        (key === "Number of Downloads (per month)" || key === "Download Format" || key === "Storage") ? "hidden" : ""} `}>
                                                     {PricingDetails[0][key] === "Not Included" ? "close" : "done"}
                                                 </span>
                                                 <span className={`${(key === "Availability" || key === "Contact Method") ||
-                                                    (key === "Number of Downloads (per month)" || key === "Download Format") ? "" : "hidden"} md:block`}>
+                                                    (key === "Number of Downloads (per month)" || key === "Download Format" || key === "Storage" ) ? "" : "hidden"} md:block`}>
                                                     {PricingDetails[0][key]}
                                                 </span>
                                             </div>
@@ -63,11 +63,11 @@ function PriceComparisonTable() {
                                             <div className="flex items-center">
                                                 <span className={`material-symbols-outlined pe-1 md:block 
                                                     ${(key === "Availability" || key === "Contact Method") ||
-                                                        (key === "Number of Downloads (per month)" || key === "Download Format") ? "hidden" : ""}  `}>
+                                                        (key === "Number of Downloads (per month)" || key === "Download Format" || key === "Storage") ? "hidden" : ""}  `}>
                                                     {PricingDetails[1][key] === "Not Included" ? "close" : "done"}
                                                 </span>
                                                 <span className={`${(key === "Availability" || key === "Contact Method") ||
-                                                    (key === "Number of Downloads (per month)" || key === "Download Format") ? "" : "hidden"} md:block`}>
+                                                    (key === "Number of Downloads (per month)" || key === "Download Format" || key === "Storage") ? "" : "hidden"} md:block`}>
                                                     {PricingDetails[1][key]}
                                                 </span>
                                             </div>
@@ -77,11 +77,11 @@ function PriceComparisonTable() {
                                             <div className="flex items-center">
                                                 <span className={`material-symbols-outlined pe-1 md:block 
                                                     ${(key === "Availability" || key === "Contact Method") ||
-                                                        (key === "Number of Downloads (per month)" || key === "Download Format") ? "hidden" : ""}  `}>
+                                                        (key === "Number of Downloads (per month)" || key === "Download Format" || key === "Storage") ? "hidden" : ""}  `}>
                                                     {PricingDetails[2][key] === "Not Included" ? "close" : "done"}
                                                 </span>
                                                 <span className={`${(key === "Availability" || key === "Contact Method") ||
-                                                    (key === "Number of Downloads (per month)" || key === "Download Format") ? "" : "hidden"} md:block`}>
+                                                    (key === "Number of Downloads (per month)" || key === "Download Format" || key === "Storage") ? "" : "hidden"} md:block`}>
                                                     {PricingDetails[2][key]}
                                                 </span>
                                             </div>
@@ -96,7 +96,7 @@ function PriceComparisonTable() {
                 </table>
             </div>
             <div className="w-full flex justify-center relative -mt-6">
-                <button className='bg-white rounded-full border h-12 w-12 flex justify-center items-center'
+                <button className='bg-white rounded-full border h-12 w-12 flex justify-center items-center hover:bg-krutNeon zoomEffect'
                     onClick={setPricingExpandView}
                 >
                     <span className={`material-symbols-outlined ${isPricingExpanded ? "rotate-180" : ""}`}>  expand_more </span>

@@ -21,20 +21,18 @@ function ToolSlider({ beforeImg, afterImg }) {
       <div className="flex items-center justify-center ">
 
         <div className="relative">
-          <img className="w-[40vw] h-[50vw] lg:h-[50vh] rounded-l-3xl relative -z-10 left-6 object-cover" src={beforeImg} />
+          <img className="w-[40vw] h-[40vw] rounded-l-3xl relative -z-10 left-6 object-cover border border-krutNeon" src={beforeImg} />
         </div>
 
 
         {isClicked && (
           <img
-            className="w-[40vw] h-[50vw] lg:h-[50vh] bg-white rounded-3xl object-cover"
-            src={afterImg}
-            alt="Processed Image"
-          />
+            className="w-[40vw] h-[40vw] bg-white rounded-3xl object-cover border border-krutNeon"
+            src={afterImg} alt="Processed Image" />
         )}
 
         {isClicked == false && (
-          <div className="w-[40vw] h-[50vw] lg:h-[50vh] bg-white rounded-3xl" ></div>
+          <div className="w-[40vw] h-[40vw] bg-white rounded-3xl border border-krutNeon" ></div>
         )}
       </div>
 
@@ -53,8 +51,11 @@ function ToolSlider({ beforeImg, afterImg }) {
               width: 'fit-content' // Make the width fit the content
             }}  >
             <div className="flex h-[45px] items-center" >
-              <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl relative text-white font-semibold mt-2 pointer-events-none" >
-                Swipe to Future
+              <span className="block md:hidden text-lg lg:text-xl xl:text-2xl relative text-white font-semibold mt-2 pointer-events-none" >
+                Swipe it
+              </span>
+              <span className="hidden md:block text-lg lg:text-xl xl:text-2xl relative text-white font-semibold mt-2 pointer-events-none" >
+                Swipe to the Future
               </span>
             </div>
           </div>
@@ -65,7 +66,7 @@ function ToolSlider({ beforeImg, afterImg }) {
             className="w-full accent-white border-gray-300 cursor-ew-resize relative h-[50px]"
             style={{
               borderRadius: '30px', // Set border radius to half of the height for a circular slider
-              background: 'linear-gradient(to right, #00D4EF 0%, #FFF calc((var(--range-value) - 1)*1%), transparent calc(var(--range-value) * 1%), transparent 100%)', // Set background gradient
+              background: 'linear-gradient(to right, #00D4EF 0%, #FFF calc((var(--range-value) - 1)*1%), rgba(0, 0, 0, 0.1) calc(var(--range-value) * 1%), rgba(0, 0, 0, 0.1) 100%)',
               outline: 'white solid 2px', // Set white outline
               appearance: 'none', // Remove default styles
               '--range-value': slideValue // Set custom property for the current value
@@ -75,7 +76,7 @@ function ToolSlider({ beforeImg, afterImg }) {
           />
         </div>
       </div>
-      
+
     </div>
   );
 }
